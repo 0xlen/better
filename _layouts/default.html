@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="{% if page.path contains 'zh-TW' %}zh-TW{% else %}en{% endif %}">
+  <head>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <link rel="alternate" type="application/rss+xml" href="/notes.xml">
+    <link rel="icon" href="/assets/fav.png" sizes="24x24">
+    {% if page.collection == "posts" %}
+      <link href="/assets/syntax.css" rel="stylesheet" type="text/css">
+    {% endif %}
+    <link href="/assets/new.css" rel="stylesheet" type="text/css">
+    {% if page.collection == "posts" or page.collection == "pages" %}
+      <meta content="{{ site.url }}{{ page.url }}" property="og:url">
+      <meta content="{{ page.content | strip_html | strip_newlines | truncate: 120 }}" name="description">
+      <meta content="article" property="og:type">
+      <meta name="twitter:card" content="summary_large_image">
+      <title>{{ page.title }} - {{ site.title }}</title>
+      <meta content="{{ page.title }} - {{ site.title }}" property="og:title">
+    {% else %}
+      <title>{{ site.title }}</title>
+      <meta content="{{ site.title }}" property="og:title">
+      <meta content="{{ site.description }}" name="description">
+      <meta content="blog" property="og:type">
+      
+    {% endif %}
+    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro&display=swap" rel="stylesheet">
+
+  </head>
+  <body class="{% if page.path != 'index.html' and page.path != 'zh-TW/index.html' %}post-body{% endif %}">
+    <header>
+      <div class="logo-container">
+        {% if page.path != 'index.html' and page.path != 'zh-TW/index.html' %}
+          <a href="/" aria-label="Home">&leftarrow;</a>
+        {% endif %}
+
+        &nbsp;
+
+        {% if page.path != 'index.html' and page.path != 'zh-TW/index.html' %}
+          <strong class="font">Eason Cao</strong>
+        {% endif %}
+      </div>
+      <h1 class="h1">
+        {{ page.title }}
+      </h1>
+      {% if page.collection == 'posts' %}<time>{{ page.date | date_to_string }}</time>{% endif %}
+      <div class="desc">{{ page.header_content }}</div>
+    </header>
+    <main>
+      {% if page.collection == "posts" or page.collection == "pages" %}
+        <article>
+          {{ content }}
+        </article>
+        <!--div class="pagination">
+          {% if page.previous %}
+            <div><a href="{{ page.previous.url }}">
+              Prev: {{ page.previous.title }}
+            </a></div>
+          {% endif %}
+          {% if page.next %}
+            <div><a href="{{ page.next.url }}">
+              Next: {{ page.next.title }}
+            </a></div>
+          {% endif %}
+        </div-->
+      {% else %}
+        {{ content }}
+      {% endif %}
+    </main>
+
+    <footer>
+      <hr class="hr">
+      Eason Cao
+      (<a href="https://easoncao.com">View</a>)
+    </footer>
+
+    <script>
+      function settime() {
+        const timestamp = document.querySelector('[data-timestamp-text]')
+        if (!timestamp || !('Intl' in window)) return
+        const options = {
+          timeZone: "Asia/Taipei",
+          timeStyle: "short",
+          hour12: false
+        }
+        let time = new Intl.DateTimeFormat(navigator.language || "zh-TW", options).format(new Date())
+        // https://bugs.chromium.org/p/chromium/issues/detail?id=1262801
+        if (time.match(/^24:/)) time = time.replace('24:', '00:')
+        // Setting interpolated string instead of just the time because
+        // if there's no JS there should be no mentions of current time
+        timestamp.textContent = timestamp.getAttribute('data-timestamp-text').replace('{time}', time)
+        setTimeout(settime, (60 - new Date().getSeconds()) * 1000)
+      }
+      settime()
+    </script>
+  </body>
+</html>

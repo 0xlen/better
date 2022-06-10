@@ -1,0 +1,15 @@
+title:            Eason
+description:      Eason's notes.
+url:              https://better.easoncao.com
+permalink:        /posts/:title
+timezone:         Europe/Dublin
+kramdown:
+  hard_wrap: true
+sass:
+  sass_dir: assets
+  style: :compressed
+collections:
+  notes:
+    output: false
+  pages:
+    output: true

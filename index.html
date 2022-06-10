@@ -1,0 +1,38 @@
+---
+title: Eason Cao
+layout: default
+---
+
+<p>
+  <strong>Engineer</strong> 
+  <br/>
+  Taipei<span data-timestamp-text=", where it's currently {time}"></span>.
+</p>
+
+<hr class="hr">
+
+<h2 class="text">Posts <a href="/feed.xml" class="styled-link">RSS</a></span></h2>
+<ul aria-label="posts" class="terminal">
+{% assign posts = site.pages | where: "feature", 1 %}
+{% for post in posts %}
+  <li class="line"><a href="{{ post.url }}">{{ post.title }}</a></li>
+{% endfor %}
+
+{% assign posts = site.posts | where: "feature", 1 %}
+{% for post in posts %}
+  <li class="line"><a href="{{ post.url }}">{{ post.title }}</a><br>
+    <time>{{ post.date | date_to_string }}</time></li>
+{% endfor %}
+
+</ul>
+
+<hr class="hr">
+
+{% assign note = site.data.notes[0] %}
+<h2 class="text">Short notes <a href="/notes" class="styled-link">All notes</a> <a href="/notes.xml" class="styled-link">RSS</a></h2>
+<div class="note">
+  <div class="note-heading">
+    Latest: {{ note.date | date: "%B %d, %Y" }}
+  </div >
+  {{ note.content | markdownify }}
+</div>

@@ -1,0 +1,21 @@
+---
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>@eason's notes</title>
+    <description>Micro posts.</description>
+    <lastBuildDate>{{ site.data.notes.first.date | date_to_rfc822 }}</lastBuildDate>
+    <link>{{ site.url }}/notes.xml</link>
+    <atom:link href="{{ site.url }}/notes.xml" rel="self" type="application/rss+xml" />
+    {% for note in site.data.notes limit: 10 %}
+      <item>
+        <title>{{ note.date | date: "%Y-%m-%d" }}</title>
+        <description>{{ note.content | markdownify | xml_escape }}</description>
+        <pubDate>{{ note.date | date_to_rfc822 }}</pubDate>
+        <link>https://better.easoncao.com/notes#t{{ note.date | date: "%Y%m%d%I%M" }}</link>
+        <guid isPermaLink="true">https://better.easoncao.com/notes#t{{ note.date | date: "%Y%m%d%I%M" }}</guid>
+      </item>
+    {% endfor %}
+  </channel>
+</rss>
