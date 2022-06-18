@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="text/html; charset=utf-8" http-equiv="content-type">
+    <link rel="alternate" type="application/rss+xml" href="/notes.xml">
+    <link rel="icon" href="/assets/fav.png" sizes="24x24">
+    
+    <link href="/assets/new.css" rel="stylesheet" type="text/css">
+    
+      <title>Eason</title>
+      <meta content="Eason" property="og:title">
+      <meta content="Eason's notes." name="description">
+      <meta content="blog" property="og:type">
+      
+    
+    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro&display=swap" rel="stylesheet">
+
+  </head>
+  <body class="">
+    <header>
+      <div class="logo-container">
+        
+
+        &nbsp;
+
+        
+      </div>
+      <h1 class="h1">
+        Eason Cao
+      </h1>
+      
+      <div class="desc"></div>
+    </header>
+    <main>
+      
+        <p>
+  <strong>Engineer</strong> 
+  <br/>
+  Taipei<span data-timestamp-text=", where it's currently {time}"></span>.
+</p>
+
+<hr class="hr">
+
+<h2 class="text">Posts <a href="/feed.xml" class="styled-link">RSS</a></span></h2>
+<ul aria-label="posts" class="terminal">
+
+
+
+
+
+  <li class="line"><a href="/posts/nothing-here">Initial page</a><br>
+    <time>01 Jun 2022</time></li>
+
+
+</ul>
+
+<hr class="hr">
+
+
+<h2 class="text">Short notes <a href="/notes" class="styled-link">All notes</a> <a href="/notes.xml" class="styled-link">RSS</a></h2>
+<div class="note">
+  <div class="note-heading">
+    Latest: June 17, 2022
+  </div >
+  <p>Go to office is like doing social purpose and it may not perfectly optimze my working flow, ignored the meditation this time due to office rushs. But met people and had a conversation always is the nice part.<br />
+Three things gratituded: (1) Know a nice asian food restuarant near the office (2) Tried to do something great, and spread positive things and good feeling with people. e.g. shared protien kits (3) Had oppertunity to talk, exchange ideas, built connections, without any intention</p>
+
+</div>
+
+      
+    </main>
+
+    <footer>
+      <hr class="hr">
+      Eason Cao
+      (<a href="https://easoncao.com">View</a>)
+    </footer>
+
+    <script>
+      function settime() {
+        const timestamp = document.querySelector('[data-timestamp-text]')
+        if (!timestamp || !('Intl' in window)) return
+        const options = {
+          timeZone: "Asia/Taipei",
+          timeStyle: "short",
+          hour12: false
+        }
+        let time = new Intl.DateTimeFormat(navigator.language || "zh-TW", options).format(new Date())
+        // https://bugs.chromium.org/p/chromium/issues/detail?id=1262801
+        if (time.match(/^24:/)) time = time.replace('24:', '00:')
+        // Setting interpolated string instead of just the time because
+        // if there's no JS there should be no mentions of current time
+        timestamp.textContent = timestamp.getAttribute('data-timestamp-text').replace('{time}', time)
+        setTimeout(settime, (60 - new Date().getSeconds()) * 1000)
+      }
+      settime()
+    </script>
+  </body>
+</html>
